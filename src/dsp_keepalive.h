@@ -1,8 +1,6 @@
 #pragma once
 #include "stdafx.h"
 
-static void RunDSPConfigPopup(const dsp_preset& p_data, HWND p_parent, dsp_preset_edit_callback& p_callback);
-
 struct dsp_width_params {
 	dsp_width_params(audio_sample width) { set_width(width); }
 	audio_sample width;

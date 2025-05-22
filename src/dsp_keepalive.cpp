@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "dsp_keepalive.h"
-#include "dsp_keepalive_dialog.h"
 
 DECLARE_COMPONENT_VERSION("Keep Alive", "0.0.1", "Keep Alive DSP component 0.0.1\nby withmorten");
 VALIDATE_COMPONENT_FILENAME("foo_dsp_keepalive.dll");
@@ -32,7 +31,7 @@ DspWidth::DspWidth(dsp_preset const& in) : m_params{ dsp_width_params(0.5) } {
 
 GUID DspWidth::g_get_guid() {
 	static const GUID guid =
-	{ 0x3e7be68b, 0xf7f3, 0x4024, { 0x87, 0x7e, 0x9b, 0x4c, 0xd3, 0xc9, 0xea, 0x6b } };
+	{ 0x2a8f9c14, 0x6b2e, 0x4d73, { 0x9a, 0x15, 0x7c, 0x8e, 0x4f, 0x91, 0x2b, 0x56 } };
 	return guid;
 }
 
@@ -40,7 +39,7 @@ void DspWidth::g_get_name(pfc::string_base& p_out) {
 	p_out = "Keep Alive";
 }
 
-bool DspWidth::g_have_config_popup() { return true; }
+bool DspWidth::g_have_config_popup() { return false; }
 
 
 bool DspWidth::on_chunk(audio_chunk* chunk, abort_callback&) {
@@ -83,14 +82,6 @@ void DspWidth::parse_preset(dsp_width_params& params, const dsp_preset& in) {
 }
 
 void DspWidth::g_show_config_popup(const dsp_preset& p_data, HWND p_parent, dsp_preset_edit_callback& p_callback) {
-	::RunDSPConfigPopup(p_data, p_parent, p_callback);
-}
-
-static void RunDSPConfigPopup(const dsp_preset& p_data, HWND p_parent, dsp_preset_edit_callback& p_callback) {
-	DspWidthDialog popup(p_data, p_callback);
-	if (popup.DoModal(p_parent) != IDOK) {
-		p_callback.on_preset_changed(p_data);
-	}
 }
 
 static dsp_factory_t<DspWidth> g_dsp_width_factory;
