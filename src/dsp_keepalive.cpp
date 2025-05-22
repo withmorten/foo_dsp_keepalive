@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "dsp_width.h"
-#include "dsp_width_dialog.h"
+#include "dsp_keepalive.h"
+#include "dsp_keepalive_dialog.h"
 
-DECLARE_COMPONENT_VERSION("Stereo Width", "1.2.0", "Stereo Width DSP component 1.2.0\nby h1data");
-VALIDATE_COMPONENT_FILENAME("foo_dsp_width.dll");
+DECLARE_COMPONENT_VERSION("Keep Alive", "0.0.1", "Keep Alive DSP component 0.0.1\nby withmorten");
+VALIDATE_COMPONENT_FILENAME("foo_dsp_keepalive.dll");
 
 void dsp_width_params::set_width(audio_sample width) {
 	this->width = width;
@@ -37,7 +37,7 @@ GUID DspWidth::g_get_guid() {
 }
 
 void DspWidth::g_get_name(pfc::string_base& p_out) {
-	p_out = "Stereo Width";
+	p_out = "Keep Alive";
 }
 
 bool DspWidth::g_have_config_popup() { return true; }

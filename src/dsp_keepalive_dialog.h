@@ -1,7 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "resource.h"
-#include "dsp_width.h"
+#include "dsp_keepalive.h"
 
 class DspWidthDialog : public CDialogImpl<DspWidthDialog> {
 public:

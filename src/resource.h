@@ -1,6 +1,6 @@
 //{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by foo_dsp_width.rc
+// Used by foo_dsp_keepalive.rc
 //
 #define IDD_DSP                         102
 #define IDC_SLIDER                      1012

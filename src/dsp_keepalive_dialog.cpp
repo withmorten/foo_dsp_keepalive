@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "resource.h"
-#include "dsp_width_dialog.h"
-#include "dsp_width.h"
+#include "dsp_keepalive_dialog.h"
+#include "dsp_keepalive.h"
 
 BOOL DspWidthDialog::OnInitDialog(CWindow, LPARAM) {
 	m_slider = GetDlgItem(IDC_SLIDER);
