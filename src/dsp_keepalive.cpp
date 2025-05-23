@@ -69,10 +69,12 @@ bool DspKeepAlive::on_chunk(audio_chunk* chunk, abort_callback&) {
 }
 
 bool DspKeepAlive::g_get_default_preset(dsp_preset& p_out) {
+    dsp_preset_builder builder;
+    builder.finish(g_get_guid(), p_out);
 	return true;
 }
 
 void DspKeepAlive::g_show_config_popup(const dsp_preset& p_data, HWND p_parent, dsp_preset_edit_callback& p_callback) {
 }
 
-static dsp_factory_t<DspKeepAlive> g_dsp_width_factory;
+static dsp_factory_t<DspKeepAlive> g_dsp_keepalive_factory;
