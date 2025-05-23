@@ -3,6 +3,8 @@
 ## What is this?
 A DSP component for foobar2000 which keeps audio devices alive by adding an inaudible sound at a very high frequency.
 
+Largely adapted from https://github.com/h1data/foo_dsp_width.
+
 ## Installation
 1. download the zip file started with "foo_dsp_keepalive" from [Releases](https://github.com/withmorten/foo_dsp_keepalive/releases/latest) section 
 2. open foobar2000 > File > Preferences > Components
