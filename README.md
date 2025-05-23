@@ -1,4 +1,4 @@
-# Stereo Width
+# Keep Alive
 
 ## What is this?
 A DSP component for foobar2000 which keeps audio devices alive by adding an inaudible sound at a very high frequency.
@@ -10,7 +10,7 @@ Largely adapted from https://github.com/h1data/foo_dsp_width.
 2. open foobar2000 > File > Preferences > Components
 3. click Install and select the zip file and restart foobar2000
 4. open File > Preferences > Playback > DSP Manager
-5. add "Stereo Width" to "Active DSPs" and adjust width in percent
+5. add "Keep Alive" to "Active DSPs" and adjust amplitude
 6. enjoy!
 
 ## Build dependencies
