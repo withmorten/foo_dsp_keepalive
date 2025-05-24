@@ -15,7 +15,7 @@ Largely adapted from https://github.com/h1data/foo_dsp_width.
 
 ## Build dependencies
 - Visual Studio Community 2022
-- foobar2000 SDK 2023-05-10 https://www.foobar2000.org/SDK
+- foobar2000-SDK-2025-03-07 https://www.foobar2000.org/SDK
 - Windows Template Library https://sourceforge.net/projects/wtl/
 
 ## Build Procedure
