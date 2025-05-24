@@ -1,10 +1,18 @@
 #include "stdafx.h"
 #include "dsp_keepalive.h"
+#include "dsp_keepalive_dialog.h"
 
 #define M_PI 3.14159265358979323846
 
+#define DEFAULT_AMPLITUDE 1
+
 DECLARE_COMPONENT_VERSION("Keep Alive", "0.0.1", "Keep Alive DSP component 0.0.1\nby withmorten");
 VALIDATE_COMPONENT_FILENAME("foo_dsp_keepalive.dll");
+
+void dsp_keepalive_params::set_amplitude(int amplitude) {
+    this->amplitude_source = amplitude;
+	this->amplitude = amplitude_source / 1000;
+}
 
 void DspKeepAlive::on_endofplayback(abort_callback&) { }
 void DspKeepAlive::on_endoftrack(abort_callback&) { }
@@ -12,7 +20,8 @@ void DspKeepAlive::flush() { }
 double DspKeepAlive::get_latency() { return 0; }
 bool DspKeepAlive::need_track_change_mark() { return false; }
 
-DspKeepAlive::DspKeepAlive(dsp_preset const& in) {
+DspKeepAlive::DspKeepAlive(dsp_preset const &in) : m_params{ dsp_keepalive_params(DEFAULT_AMPLITUDE) } {
+	parse_preset(m_params, in);
 }
 
 GUID DspKeepAlive::g_get_guid() {
@@ -25,7 +34,7 @@ void DspKeepAlive::g_get_name(pfc::string_base& p_out) {
 	p_out = "Keep Alive";
 }
 
-bool DspKeepAlive::g_have_config_popup() { return false; }
+bool DspKeepAlive::g_have_config_popup() { return true; }
 
 
 bool DspKeepAlive::on_chunk(audio_chunk* chunk, abort_callback&) {
@@ -38,7 +47,7 @@ bool DspKeepAlive::on_chunk(audio_chunk* chunk, abort_callback&) {
 
     // High frequency tone parameters
     const double tone_frequency = 22049.0; // Hz - above most human hearing
-    const audio_sample tone_amplitude = 0.0001f; // Very quiet amplitude
+    const audio_sample tone_amplitude = m_params.amplitude;
 
     // Static phase accumulator to maintain continuity between chunks
     static double phase = 0.0;
@@ -69,12 +78,37 @@ bool DspKeepAlive::on_chunk(audio_chunk* chunk, abort_callback&) {
 }
 
 bool DspKeepAlive::g_get_default_preset(dsp_preset& p_out) {
-    dsp_preset_builder builder;
-    builder.finish(g_get_guid(), p_out);
+    make_preset(dsp_keepalive_params(DEFAULT_AMPLITUDE), p_out);
 	return true;
 }
 
+void DspKeepAlive::make_preset(dsp_keepalive_params params, dsp_preset& out) {
+	dsp_preset_builder builder;
+	builder << params.amplitude_source;
+	builder.finish(g_get_guid(), out);
+}
+
+void DspKeepAlive::parse_preset(dsp_keepalive_params& params, const dsp_preset& in) {
+	try {
+		dsp_preset_parser parser(in);
+        int amplitude;
+		parser >> amplitude;
+		params.set_amplitude(amplitude);
+	}
+	catch (exception_io_data) {
+		params.set_amplitude(DEFAULT_AMPLITUDE);
+	}
+}
+
 void DspKeepAlive::g_show_config_popup(const dsp_preset& p_data, HWND p_parent, dsp_preset_edit_callback& p_callback) {
+    ::RunDSPConfigPopup(p_data, p_parent, p_callback);
+}
+
+static void RunDSPConfigPopup(const dsp_preset& p_data, HWND p_parent, dsp_preset_edit_callback& p_callback) {
+	DspKeepAliveDialog popup(p_data, p_callback);
+	if (popup.DoModal(p_parent) != IDOK) {
+		p_callback.on_preset_changed(p_data);
+	}
 }
 
 static dsp_factory_t<DspKeepAlive> g_dsp_keepalive_factory;
