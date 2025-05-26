@@ -6,7 +6,7 @@
 
 #define DEFAULT_AMPLITUDE 1
 
-DECLARE_COMPONENT_VERSION("Keep Alive", "0.0.1", "Keep Alive DSP component 0.0.1\nby withmorten");
+DECLARE_COMPONENT_VERSION("Keep Alive", "0.0.2", "Keep Alive DSP component 0.0.2\nby withmorten");
 VALIDATE_COMPONENT_FILENAME("foo_dsp_keepalive.dll");
 
 void dsp_keepalive_params::set_amplitude(int amplitude) {
