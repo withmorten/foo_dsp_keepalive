@@ -11,7 +11,7 @@ VALIDATE_COMPONENT_FILENAME("foo_dsp_keepalive.dll");
 
 void dsp_keepalive_params::set_amplitude(int amplitude) {
     this->amplitude_source = amplitude;
-	this->amplitude = amplitude_source / 1000;
+	this->amplitude = (double)amplitude_source / (double)10000;
 }
 
 void DspKeepAlive::on_endofplayback(abort_callback&) { }
